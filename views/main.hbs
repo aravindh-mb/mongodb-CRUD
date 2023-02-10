@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MangoDB</title>
+</head>
+<body>
+    <h1>MangoDB</h1>
+    <p>{{message}}</p>
+
+
+{{#if edit_id}}
+    {{!-- update details --}}
+    <form method="post" action = "/update_details/{{edit_id}}">
+        <input type="text" name="src"  placeholder="src" value="{{edit_details.images}}"><br>
+        <input type="text" name="firstname"  placeholder="first name" value="{{edit_details.first_name}}" ><br>
+        <input type="text" name="lastname"  placeholder="lastname" value="{{edit_details.last_name}}" ><br>
+        <input type="email" name="email"  placeholder="email" value="{{edit_details.email}}" ><br>
+        <input type="text" name="gender" placeholder="gender" value="{{edit_details.gender}}" ><br>
+        
+        <input type="submit" placeholder="submit" value="update">
+    </form>
+  
+{{else}}
+      {{!--store details  --}}
+    <form method="post" action = "/store_details">
+        <input type="text" name="src"  placeholder="src"><br>
+        <input type="text" name="firstname"  placeholder="first name"><br>
+        <input type="text" name="lastname"  placeholder="lastname"><br>
+        <input type="email" name="email"  placeholder="email"><br>
+        <input type="text" name="gender" placeholder="gender"><br>
+        
+        <input type="submit" placeholder="submit" value="create">
+    </form>
+
+{{/if}}
+
+    <ul>
+        {{#each employees}}
+        <li>{{this.first_name}} - {{this.images}} <a href="/?edit_id={{this._id}}">edit data</a> <a href="/?delete_id={{this._id}}" onclick="return confirm('do you want delete this ?')" >delete</a> </li>
+        <img src="{{this.images}}">
+        {{/each}}
+    </ul>
+</body>
+</html>
+
